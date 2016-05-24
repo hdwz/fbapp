@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  resources :groups do
+    member do
+      post :join
+      delete :leave
+    end
+  end
+  resources :status_updates
+  resources :profiles
   devise_for :users
   # get 'home/index'
   root 'home#index'

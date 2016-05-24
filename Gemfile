@@ -9,6 +9,8 @@ gem 'devise'
 gem 'simple_form'
 gem 'bootstrap'
 gem 'carrierwave'
+gem 'cancancan'
+gem 'will_paginate'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets

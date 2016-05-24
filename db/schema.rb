@@ -11,7 +11,60 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160524002638) do
+ActiveRecord::Schema.define(version: 20160524062949) do
+
+  create_table "groups", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.string   "logo"
+    t.integer  "owner_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "memberships", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_memberships_on_group_id"
+    t.index ["user_id"], name: "index_memberships_on_user_id"
+  end
+
+  create_table "profiles", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "picture"
+    t.text     "hobbies"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_profiles_on_user_id"
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "status_updates", force: :cascade do |t|
+    t.text     "status"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "image"
+    t.index ["user_id"], name: "index_status_updates_on_user_id"
+  end
+
+  create_table "user_roles", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "role_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["role_id"], name: "index_user_roles_on_role_id"
+    t.index ["user_id"], name: "index_user_roles_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
